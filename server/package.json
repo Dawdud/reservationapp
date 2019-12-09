@@ -1,0 +1,31 @@
+{
+  "name": "reactnode",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www --exec babel-node --presets babel-preset-env"
+  },
+  "dependencies": {
+    "@react-ssr/express": "^0.10.5",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "express": "^4.17.1",
+    "http-errors": "~1.6.3",
+    "jade": "^1.11.0",
+    "morgan": "^1.9.1",
+    "pg": "^7.14.0",
+    "pg-hstore": "^2.3.3",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "sequelize": "^5.21.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.6",
+    "babel-preset-env": "^1.7.0",
+    "nodemon": "^2.0.1"
+  }
+}
