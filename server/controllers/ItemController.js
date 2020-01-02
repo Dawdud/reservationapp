@@ -1,8 +1,8 @@
-import reservationItemModel from "../models";
+const itemModel = require("../models").reservation;
 
-const reservationItemController = {
+const itemController = {
   Create(req, res) {
-    return reservationItemModel
+    return itemModel
       .create({
         name: req.body.name,
         description: req.body.description,
@@ -15,17 +15,12 @@ const reservationItemController = {
       .catch(err => res.status(400).send(err));
   },
   list(req, res) {
-    return reservationItemModel
-      .findAll({
-        include: [
-          {
-            model: reservationItemModel,
-            as: "reservationItem"
-          }
-        ]
-      })
+    return itemModel
+      .findAll()
       .then(items => res.status(200).send(items))
       .catch(error => res.status(400).send(error));
   }
 };
-export default reservationItemController;
+module.exports = {
+  itemController
+};
