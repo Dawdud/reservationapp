@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "dawidnode",
-    "password": "#####",
+    "password": "Kolano8.06.2012",
     "database": "nodeapi",
     "host": "127.0.0.1",
     "dialect": "postgres",

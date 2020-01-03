@@ -1,25 +1,24 @@
-const itemModel = require("../models").reservation;
-const itemController = {
+const userModel = require("../models").User;
+
+const userController = {
   Create(req, res) {
-    return itemModel
+    console.log(req.body);
+    return userModel
       .create({
         name: req.body.name,
-        description: req.body.description,
-        startdate: req.body.startdate,
-        enddate: req.body.enddate,
-        user: req.body.user,
-        id: req.params.id
+        password: req.body.password,
+        email: req.body.email
       })
       .then(item => res.status(201).send(item))
       .catch(err => res.status(400).send(err));
   },
   list(req, res) {
-    return itemModel
+    return userModel
       .findAll()
       .then(items => res.status(200).send(items))
       .catch(error => res.status(400).send(error));
   }
 };
 module.exports = {
-  itemController
+  userController
 };
