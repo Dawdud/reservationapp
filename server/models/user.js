@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING
   });
   User.associate = function(models) {
-    // associations can be defined here
+    /* User.hasMany(models.reservations, {
+      foreignKey: "ReservationId",
+      as: "reservate"
+    });*/
   };
   User.prototype.validPassword = function(password) {
     return bcrypt.compareSync(password, this.password);

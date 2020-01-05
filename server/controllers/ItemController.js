@@ -1,4 +1,4 @@
-const itemModel = require("../models").reservation;
+const itemModel = require("../models").reservations;
 const itemController = {
   Create(req, res) {
     return itemModel
@@ -7,13 +7,15 @@ const itemController = {
         description: req.body.description,
         startdate: req.body.startdate,
         enddate: req.body.enddate,
-        user: req.body.user,
+        guests: req.body.guests,
+        userId: req.body.userId,
         id: req.params.id
       })
       .then(item => res.status(201).send(item))
       .catch(err => res.status(400).send(err));
   },
   list(req, res) {
+    console.log(res);
     return itemModel
       .findAll()
       .then(items => res.status(200).send(items))
