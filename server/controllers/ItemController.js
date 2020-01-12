@@ -15,11 +15,15 @@ const itemController = {
       .catch(err => res.status(400).send(err));
   },
   list(req, res) {
-    console.log(res);
-    return itemModel
-      .findAll()
-      .then(items => res.status(200).send(items))
-      .catch(error => res.status(400).send(error));
+    console.log(`User authenticated? ${req.isAuthenticated()}`);
+    if (req.isAuthenticated()) {
+      return itemModel
+        .findAll()
+        .then(items => res.status(200).send(items))
+        .catch(error => res.status(400).send(error));
+    } else {
+      res.send("not logged in");
+    }
   }
 };
 module.exports = {

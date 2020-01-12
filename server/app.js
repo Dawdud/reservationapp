@@ -4,17 +4,21 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import logger from "morgan";
 const PORT = process.env.PORT || 8080;
+const cookieParser = require("cookie-parser");
 const reservation = require("./routes/findReservation");
 const createReservation = require("./routes/createReservation");
 const register = require("./routes/createUser");
 const users = require("./routes/findUser");
 require("./config/passport");
 const db = require("./models");
+const uuid = require("uuid/v4");
 const session = require("express-session");
+const FileStore = require("session-file-store")(session);
 const passport = require("./config/passport");
 const auth = require("./routes/auth");
 const app = express();
 
+app.use(cookieParser());
 app.use(cors());
 // view engine setup
 
@@ -25,7 +29,17 @@ app.use(bodyParser.json());
 app.use(logger("dev"));
 
 app.use(
-  session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
+  session({
+    genid: req => {
+      console.log("Inside the session middleware");
+      console.log(req.session);
+      return uuid();
+    },
+    store: new FileStore(),
+    secret: "keyboard cat",
+    resave: true,
+    saveUninitialized: true
+  })
 );
 app.use(passport.initialize());
 app.use(passport.session());

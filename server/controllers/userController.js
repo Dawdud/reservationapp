@@ -2,7 +2,6 @@ const userModel = require("../models").User;
 
 const userController = {
   Create(req, res) {
-    console.log(req.body);
     return userModel
       .create({
         name: req.body.name,
@@ -13,6 +12,7 @@ const userController = {
       .catch(err => res.status(400).send(err));
   },
   list(req, res) {
+    console.log(req.sessionID);
     return userModel
       .findAll()
       .then(items => res.status(200).send(items))
