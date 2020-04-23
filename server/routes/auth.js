@@ -6,17 +6,26 @@ const passport = require("../config/passport");
 
 router.post("/", (req, res, next) => {
   console.log("Inside GET / login callback");
-  passport.authenticate("local", (err, user, info) => {
-    console.log(
-      `req.session.passport: ${JSON.stringify(req.session.passport)}`
-    );
-    req.login(user, err => {
-      console.log("Inside req.login() callback");
-      console.log(
-        `req.session.passport: ${JSON.stringify(req.session.passport)}`
-      );
-      console.log(`req.user: ${JSON.stringify(req.user)}`);
-      return res.send("You were authenticated & logged in!\n");
+  passport.authenticate("local", { session: false }, (err, user, info) => {
+    console.log(err);
+    if (err || !user) {
+      return res.status(400).json({
+        message: info ? info.message : "Login failed",
+        user: user,
+      });
+    }
+
+    req.login(user, { session: false }, (err) => {
+      // You have have a req.user
+      if (err) {
+        res.status(500);
+      }
+      if (!user) {
+        res.status(404).send("not logged in");
+      }
+      console.log(user);
+      const token = jwt.sign({ email: user.email, name: user.name }, "secret");
+      return res.json({ user: user.name, token });
     });
   })(req, res, next);
 });

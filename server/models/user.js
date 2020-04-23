@@ -7,11 +7,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true,
       validate: {
-        isEmail: true
-      }
+        isEmail: true,
+      },
     },
     password: { type: DataTypes.STRING, allowNull: false },
-    name: DataTypes.STRING
+    name: DataTypes.STRING,
   });
   User.associate = function(models) {
     /* User.hasMany(models.reservations, {
@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   User.prototype.validPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
   };
-  User.beforeCreate(user => {
+  User.beforeCreate((user) => {
     return (user.password = bcrypt.hashSync(
       user.password,
       bcrypt.genSaltSync(10),

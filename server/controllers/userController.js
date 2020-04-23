@@ -8,8 +8,11 @@ const userController = {
         password: req.body.password,
         email: req.body.email
       })
-      .then(item => res.status(201).send(item))
+      .then(item => res.status(200).send(item))
       .catch(err => res.status(400).send(err));
+  },
+  currentUser(req, res) {
+    return res.status(200).send({ name: req.user.name, email: req.user.email });
   },
   list(req, res) {
     console.log(req.sessionID);
