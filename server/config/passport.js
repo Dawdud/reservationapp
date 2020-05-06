@@ -39,7 +39,8 @@ passport.use(
   new JWTStrategy(
     {
       jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-      secretOrKey: "secret",
+      secretOrKey:
+        "oUoWbw923fHBZDsH68Hf625yYb8tBsIAs24hdZeOzfd4qT3IIrW2jI69Rrdo8mp",
     },
     function(jwtPayload, cb) {
       //find the user in db if needed

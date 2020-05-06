@@ -24,7 +24,10 @@ router.post("/", (req, res, next) => {
         res.status(404).send("not logged in");
       }
       console.log(user);
-      const token = jwt.sign({ email: user.email, name: user.name }, "secret");
+      const token = jwt.sign(
+        { email: user.email, name: user.name },
+        "oUoWbw923fHBZDsH68Hf625yYb8tBsIAs24hdZeOzfd4qT3IIrW2jI69Rrdo8mp"
+      );
       return res.json({ user: user.name, token });
     });
   })(req, res, next);
