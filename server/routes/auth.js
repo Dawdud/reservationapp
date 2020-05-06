@@ -26,7 +26,7 @@ router.post("/", (req, res, next) => {
       console.log(user);
       const token = jwt.sign(
         { email: user.email, name: user.name },
-        "oUoWbw923fHBZDsH68Hf625yYb8tBsIAs24hdZeOzfd4qT3IIrW2jI69Rrdo8mp"
+        "secret test"
       );
       return res.json({ user: user.name, token });
     });
