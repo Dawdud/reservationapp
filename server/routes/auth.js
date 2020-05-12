@@ -26,9 +26,10 @@ router.post("/", (req, res, next) => {
       console.log(user);
       const token = jwt.sign(
         { email: user.email, name: user.name },
-        "secret test"
+        "oUoWbw923fHBZDsH68Hf625yYb8tBsIAs24hdZeOzfd4qT3IIrW2jI69Rrdo8mp",
+        { expiresIn: "3h" }
       );
-      return res.json({ user: user.name, token });
+      return res.json({ user: user.name, userId: user.id, token });
     });
   })(req, res, next);
 });

@@ -33,8 +33,16 @@ app.use(logger("dev"));
 app.use(passport.initialize());
 //app.use(passport.session());
 
-app.use("/reservation", reservation);
-app.use("/createreservation", createReservation);
+app.use(
+  "/reservation",
+  passport.authenticate("jwt", { session: false }),
+  reservation
+);
+app.use(
+  "/createreservation",
+  passport.authenticate("jwt", { session: false }),
+  createReservation
+);
 app.use("/users", passport.authenticate("jwt", { session: false }), users);
 app.use(
   "/isauth",
