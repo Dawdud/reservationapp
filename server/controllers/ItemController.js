@@ -16,14 +16,18 @@ const itemController = {
   },
   list(req, res) {
     if (req.isAuthenticated()) {
-      return itemModel
-        .findAll({
-          where: {
-            userId: req.query.id,
-          },
-        })
-        .then((items) => res.status(200).send(items))
-        .catch((error) => res.status(400).send(error));
+      if (typeof req.query.id === "string") {
+        return itemModel
+          .findAll({
+            where: {
+              userId: req.query.id,
+            },
+          })
+          .then((items) => res.status(200).send(items))
+          .catch((error) => res.status(400).send(error));
+      } else {
+        res.send("can not find item");
+      }
     } else {
       res.send("not logged in");
     }
