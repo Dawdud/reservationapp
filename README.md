@@ -1,2 +1,2 @@
 # reservationapp
-Simple reservation system with react, node.js and express. 
+Simple reservation system written in react, node.js and express. 
