@@ -1,28 +1,23 @@
 const itemModel = require("../models").reservations;
+const ItemService = require("../services/ItemService");
 const itemController = {
   Create(req, res) {
-    return itemModel
-      .create({
-        name: req.body.name,
-        description: req.body.description,
-        startdate: req.body.startdate,
-        enddate: req.body.enddate,
-        guests: req.body.guests,
-        userId: req.body.userId,
-        id: req.params.id,
-      })
+    let service = new ItemService();
+    const userDto = req.body;
+    const userId = req.params.id;
+    service
+      .CreateReservationItem(userDto, userId)
       .then((item) => res.status(201).send(item))
       .catch((err) => res.status(400).send(err));
   },
   list(req, res) {
+    let service = new ItemService();
+
     if (req.isAuthenticated()) {
       if (typeof req.query.id === "string") {
-        return itemModel
-          .findAll({
-            where: {
-              userId: req.query.id,
-            },
-          })
+        const userId = req.query.id;
+        service
+          .GetReservationItem(userId)
           .then((items) => res.status(200).send(items))
           .catch((error) => res.status(400).send(error));
       } else {
