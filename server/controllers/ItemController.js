@@ -27,6 +27,15 @@ const itemController = {
       res.send("not logged in");
     }
   },
+  update(req, res) {
+    let service = new ItemService();
+    const reservationDto = req.body;
+    const reservationId = req.query.id;
+    service
+      .UpdateReservationItem(reservationDto, reservationId)
+      .then((item) => res.status(201).send(item))
+      .catch((err) => res.status(400).send(err));
+  },
 };
 module.exports = {
   itemController,

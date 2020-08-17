@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 8080;
 const cookieParser = require("cookie-parser");
 
 const reservation = require("./routes/findReservation");
+const updateReservation=  require("./routes/updateReservation");
 const createReservation = require("./routes/createReservation");
 const register = require("./routes/createUser");
 const users = require("./routes/findUser");
@@ -33,6 +34,16 @@ app.use(logger("dev"));
 app.use(passport.initialize());
 ///app.use(passport.session());
 
+app.use(
+  "/reservation",
+  passport.authenticate("jwt", { session: false }),
+  reservation
+);
+app.use(
+  "/updateReservation",
+  passport.authenticate("jwt", { session: false }),
+  updateReservation
+);
 app.use(
   "/reservation",
   passport.authenticate("jwt", { session: false }),
