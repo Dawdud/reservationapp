@@ -1,15 +1,15 @@
 const itemModel = require("../models").reservations;
 
 class ItemService {
-  CreateReservationItem(user, userId) {
+  CreateReservationItem(reservation, reservationId) {
     return itemModel.create({
-      name: user.name,
-      description: user.description,
-      startdate: user.startdate,
-      enddate: user.enddate,
-      guests: user.guests,
-      userId: user.userId,
-      id: userId,
+      name: reservation.name,
+      description: reservation.description,
+      startdate: reservation.startdate,
+      enddate: reservation.enddate,
+      guests: reservation.guests,
+      userId: reservation.userId,
+      id: reservationId,
     });
   }
   GetReservationItem(userId) {
@@ -18,6 +18,24 @@ class ItemService {
         userId: userId,
       },
     });
+  }
+  UpdateReservationItem(reservation, reservationId) {
+    return itemModel.update(
+      {
+        name: reservation.name,
+        description: reservation.description,
+        startdate: reservation.startdate,
+        enddate: reservation.enddate,
+        guests: reservation.guests,
+        userId: reservation.userId,
+        id: reservationId,
+      },
+      {
+        where: {
+          id: reservationId,
+        },
+      }
+    );
   }
 }
 module.exports = ItemService;
