@@ -1,4 +1,3 @@
-const itemModel = require("../models").reservations;
 const ItemService = require("../services/ItemService");
 const itemController = {
   Create(req, res) {
@@ -33,6 +32,15 @@ const itemController = {
     const reservationId = req.query.id;
     service
       .UpdateReservationItem(reservationDto, reservationId)
+      .then((item) => res.status(201).send(item))
+      .catch((err) => res.status(400).send(err));
+  },
+
+  delete(req, res) {
+    let service = new ItemService();
+    const reservationId = req.query.id;
+    service
+      .DeleteReservationItem(reservationId)
       .then((item) => res.status(201).send(item))
       .catch((err) => res.status(400).send(err));
   },

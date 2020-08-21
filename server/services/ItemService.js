@@ -1,4 +1,4 @@
-const itemModel = require("../models").reservations;
+const itemModel = require("../models").Reservation;
 
 class ItemService {
   CreateReservationItem(reservation, reservationId) {
@@ -36,6 +36,13 @@ class ItemService {
         },
       }
     );
+  }
+  DeleteReservationItem(reservationId) {
+    return itemModel.destroy({
+      where: {
+        id: reservationId,
+      },
+    });
   }
 }
 module.exports = ItemService;
