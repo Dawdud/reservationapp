@@ -10,9 +10,10 @@ const reservation = require("./routes/findReservation");
 const updateReservation = require("./routes/updateReservation");
 const deleteReservation = require("./routes/deleteReservation");
 const createReservation = require("./routes/createReservation");
+const createPlanner = require("./routes/createPlanner");
 const register = require("./routes/createUser");
 const users = require("./routes/findUser");
-const currentUser = require("./routes/currentUser");
+const planner = require("./routes/getPlanner");
 const db = require("./models");
 const uuid = require("uuid/v4");
 const session = require("express-session");
@@ -40,6 +41,7 @@ app.use(
   passport.authenticate("jwt", { session: false }),
   reservation
 );
+app.use("/planner", passport.authenticate("jwt", { session: false }), planner);
 app.use(
   "/updateReservation",
   passport.authenticate("jwt", { session: false }),
@@ -55,6 +57,11 @@ app.use(
   "/createreservation",
   passport.authenticate("jwt", { session: false }),
   createReservation
+);
+app.use(
+  "/createplanner",
+  passport.authenticate("jwt", { session: false }),
+  createPlanner
 );
 app.use("/users", passport.authenticate("jwt", { session: false }), users);
 app.use("/login", auth);

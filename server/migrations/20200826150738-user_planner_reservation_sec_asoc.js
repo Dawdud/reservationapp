@@ -14,7 +14,7 @@ module.exports = {
         onDelete: "SET NULL",
       })
       .then(() => {
-        return queryInterface.addColumn("reservations", "plannerId", {
+        return queryInterface.addColumn("Reservations", "plannerId", {
           type: Sequelize.INTEGER,
           references: {
             model: "Planners",
@@ -28,7 +28,7 @@ module.exports = {
 
   down: (queryInterface, Sequelize) => {
     return queryInterface.removeColumn("Planners", "userId").then(() => {
-      return queryInterface.removeColumn("reservations", "reservationId");
+      return queryInterface.removeColumn("Reservations", "reservationId");
     });
   },
 };

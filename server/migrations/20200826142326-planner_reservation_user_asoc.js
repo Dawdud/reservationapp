@@ -4,7 +4,7 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface
       .addColumn("Planners", "userId", {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
 
         references: {
           model: "Users",
@@ -14,8 +14,8 @@ module.exports = {
         onDelete: "SET NULL",
       })
       .then(() => {
-        return queryInterface.addColumn("reservations", "plannerId", {
-          type: Sequelize.INTEGER,
+        return queryInterface.addColumn("Reservations", "plannerId", {
+          type: Sequelize.UUID,
           references: {
             model: "Planners",
             key: "id",
@@ -28,7 +28,7 @@ module.exports = {
 
   down: (queryInterface, Sequelize) => {
     return queryInterface.removeColumn("Planners", "userId").then(() => {
-      return queryInterface.removeColumn("reservations", "reservationId");
+      return queryInterface.removeColumn("Reservations", "reservationId");
     });
   },
 };

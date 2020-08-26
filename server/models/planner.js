@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
   Planner.associate = function(models) {
     Planner.belongsTo(models.User, {
       foreignKey: "userId",
-      as: "users",
+      as: "user",
     });
     Planner.hasMany(models.Reservation);
   };

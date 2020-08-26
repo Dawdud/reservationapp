@@ -8,14 +8,14 @@ class ItemService {
       startdate: reservation.startdate,
       enddate: reservation.enddate,
       guests: reservation.guests,
-      userId: reservation.userId,
+      PlannerId: reservation.plannerId,
       id: reservationId,
     });
   }
-  GetReservationItem(userId) {
+  GetReservationItem(PlannerId) {
     return itemModel.findAll({
       where: {
-        userId: userId,
+        PlannerId: PlannerId,
       },
     });
   }
@@ -27,7 +27,7 @@ class ItemService {
         startdate: reservation.startdate,
         enddate: reservation.enddate,
         guests: reservation.guests,
-        userId: reservation.userId,
+        plannerId: reservation.userId,
         id: reservationId,
       },
       {

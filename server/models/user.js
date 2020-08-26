@@ -14,9 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
   });
   User.associate = function(models) {
-    /* User.hasMany(models.reservations, {
-      foreignKey: "ReservationId",
-      as: "reservate"
+    /*  User.hasMany(models.Planner, {
+      as: "Planner",
     });*/
   };
   User.prototype.validPassword = function(password) {

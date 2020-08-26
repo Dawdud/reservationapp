@@ -1,22 +1,22 @@
-const ReservationService = require("../services/ReservationService");
-const itemController = {
+const PlannerService = require("../services/PlannerService");
+const plannerController = {
   Create(req, res) {
-    let service = new ReservationService();
-    const reservationDto = req.body;
-    const plannerId = req.params.id;
+    let service = new PlannerService();
+    const plannerDto = req.body;
+    const userId = req.params.id;
     service
-      .CreateReservationItem(reservationDto, plannerId)
+      .CreatePlannerItem(plannerDto, userId)
       .then((item) => res.status(201).send(item))
       .catch((err) => res.status(400).send(err));
   },
   list(req, res) {
-    let service = new ReservationService();
+    let service = new PlannerService();
 
     if (req.isAuthenticated()) {
       if (typeof req.query.id === "string") {
-        const plannerId = req.query.id;
+        const userId = req.query.id;
         service
-          .GetReservationItem(plannerId)
+          .GetPlannerItem(userId)
           .then((items) => res.status(200).send(items))
           .catch((error) => res.status(400).send(error));
       } else {
@@ -27,24 +27,24 @@ const itemController = {
     }
   },
   update(req, res) {
-    let service = new ReservationService();
+    let service = new PlannerService();
     const reservationDto = req.body;
     const reservationId = req.query.id;
     service
-      .UpdateReservationItem(reservationDto, reservationId)
+      .UpdatePlannerItem(reservationDto, reservationId)
       .then((item) => res.status(201).send(item))
       .catch((err) => res.status(400).send(err));
   },
 
   delete(req, res) {
-    let service = new ReservationService();
+    let service = new PlannerService();
     const reservationId = req.query.id;
     service
-      .DeleteReservationItem(reservationId)
+      .DeletePlannerItem(reservationId)
       .then((item) => res.status(201).send(item))
       .catch((err) => res.status(400).send(err));
   },
 };
 module.exports = {
-  itemController,
+  plannerController,
 };
