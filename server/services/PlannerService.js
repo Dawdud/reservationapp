@@ -18,7 +18,7 @@ class ItemService {
       },
     });
   }
-  UpdatePlanenrItem(planner, plannerId) {
+  UpdatePlanerItem(planner, plannerId) {
     return itemModel.update(
       {
         name: planner.name,
@@ -33,7 +33,7 @@ class ItemService {
       }
     );
   }
-  DeleteReservationItem(plannerId) {
+  DeletePlannerItem(plannerId) {
     return itemModel.destroy({
       where: {
         id: plannerId,

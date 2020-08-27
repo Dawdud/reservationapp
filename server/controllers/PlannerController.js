@@ -28,19 +28,19 @@ const plannerController = {
   },
   update(req, res) {
     let service = new PlannerService();
-    const reservationDto = req.body;
-    const reservationId = req.query.id;
+    const plannerDto = req.body;
+    const plannerId = req.query.id;
     service
-      .UpdatePlannerItem(reservationDto, reservationId)
+      .UpdatePlanerItem(plannerDto, plannerId)
       .then((item) => res.status(201).send(item))
       .catch((err) => res.status(400).send(err));
   },
 
   delete(req, res) {
     let service = new PlannerService();
-    const reservationId = req.query.id;
+    const plannerId = req.query.id;
     service
-      .DeletePlannerItem(reservationId)
+      .DeletePlannerItem(plannerId)
       .then((item) => res.status(201).send(item))
       .catch((err) => res.status(400).send(err));
   },

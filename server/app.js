@@ -10,7 +10,10 @@ const reservation = require("./routes/findReservation");
 const updateReservation = require("./routes/updateReservation");
 const deleteReservation = require("./routes/deleteReservation");
 const createReservation = require("./routes/createReservation");
+
 const createPlanner = require("./routes/createPlanner");
+const updatePlanner = require("./routes/updatePlanner");
+const deletePlanner = require("./routes/deletePlanner");
 const register = require("./routes/createUser");
 const users = require("./routes/findUser");
 const planner = require("./routes/getPlanner");
@@ -59,9 +62,19 @@ app.use(
   createReservation
 );
 app.use(
-  "/createplanner",
+  "/createPlanner",
   passport.authenticate("jwt", { session: false }),
   createPlanner
+);
+app.use(
+  "/updatePlanner",
+  passport.authenticate("jwt", { session: false }),
+  updatePlanner
+);
+app.use(
+  "/deletePlanner",
+  passport.authenticate("jwt", { session: false }),
+  deletePlanner
 );
 app.use("/users", passport.authenticate("jwt", { session: false }), users);
 app.use("/login", auth);
